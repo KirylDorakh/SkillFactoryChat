@@ -42,10 +42,26 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # django-allauth
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+
+    # Third-party
+    "crispy_forms",
+    "crispy_bootstrap5",
+
     # Local
     'accounts.apps.AccountsConfig',
     'chats.apps.ChatsConfig',
 ]
+
+SITE_ID = 1
+
+# django-crispy-forms
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -107,6 +123,24 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# allauth
+AUTH_USER_MODEL = "accounts.CustomUser"
+
+LOGIN_REDIRECT_URL = "home"
+ACCOUNT_LOGOUT_REDIRECT = "home"
+LOGIN_URL = "/accounts/login/"
+
+ACCOUNT_SESSION_REMEMBER = True
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -123,11 +157,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = "/static/"
+STATICFILES_DIRS = [BASE_DIR / "static"]  #
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-AUTH_USER_MODEL = 'accounts.CustomUser'
