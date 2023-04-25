@@ -1,6 +1,8 @@
 from django.db import models
 from accounts.models import CustomUser
 
+from django.urls import reverse
+
 
 class Chat(models.Model):
     title = models.CharField(max_length=64)
@@ -8,6 +10,9 @@ class Chat(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('chat', args=[str(self.id)])
 
 
 class Message(models.Model):

@@ -3,6 +3,12 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
-    <h1>Available chats</h1>
-
+    {% if chats %}
+        <h1>Available chats</h1>
+        {% for chat in chats %}
+            <a href="{{ chat.get_absolute_url }}">{{ chat.title }}</a>
+        {% endfor %}
+    {% else %}
+        <h1> No chats </h1>
+    {% endif %}
 {% endblock content %}
