@@ -52,9 +52,13 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
 
+    # REST
+    "rest_framework",
+
     # Local
     'accounts.apps.AccountsConfig',
     'chats.apps.ChatsConfig',
+    'api.apps.ApiConfig',
 ]
 
 SITE_ID = 1
@@ -162,7 +166,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "/static/"
+STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]  #
 
 # Default primary key field type

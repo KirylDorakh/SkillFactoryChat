@@ -1,0 +1,52 @@
+openapi: 3.0.0
+info:
+ title: 'Chat'
+ version: '0.1'
+paths:
+ / /:
+   get:
+     operationId: ChatsList
+     description: 'List of chats'
+     parameters: []
+     responses:
+       '200':
+         content:
+           application/json:
+             schema:
+               type: array
+               items:
+                 $ref: '#/components/schemas/Chat'
+         description: ''
+     tags:
+     - chats
+   post:
+     operationId: createChat
+     description: 'Create chat'
+     parameters: []
+     requestBody:
+       content:
+         application/json:
+           schema:
+             $ref: '#/components/schemas/Chat'
+     responses:
+       '201':
+         content:
+           application/json:
+             schema:
+               $ref: '#/components/schemas/Chat'
+         description: ''
+     tags:
+     - chats
+
+ schemas:
+   School:
+     type: object
+     properties:
+       id:
+         type: integer
+         readOnly: true
+       name:
+         type: string
+         maxLength: 64
+     required:
+     - name
