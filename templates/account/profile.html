@@ -1,0 +1,29 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    User
+{% endblock title %}
+
+
+{% block content %}
+    <div class="profile">
+        <h2>{{ user.username}}</h2>
+        <p>Email: {{ user.email}}</p>
+        <div class="avatar-container">
+            <img class="avatar" src="{{ user.avatar.url }}" alt="avatar">
+            <form class="change-img">
+                {% csrf_token %}
+                <input type="file" name="change" id="image" accept="image/*">
+                <button type="submit" class="btn">Submit</button>
+            </form>
+
+        </div>
+
+
+        <p><a class="button" href="{% url 'home' %}">Back</a></p>
+    </div>
+
+    <script src="{% static 'js/uploadimage.js' %}"></script>
+{% endblock content %}

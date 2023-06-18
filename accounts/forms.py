@@ -8,6 +8,7 @@ class CustomUserCreationForm(UserCreationForm):
         fields = (
             'email',
             'username',
+            'avatar',
         )
 
         
@@ -17,4 +18,5 @@ class CustomUserChangeForm(UserChangeForm):
         fields = (
             'email',
             'username',
+            'avatar',
         )

@@ -16,11 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 # from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('api/', include('api.urls')),
+    path('api-auth/', include('rest_framework.urls')),
+    # path('api/dj-rest-auth/', include('dj_rest_auth.urls')),
+    # path('api/dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
+
+    path('accounts/', include('accounts.urls')),
     path('accounts/', include('allauth.urls')),
     path('', include('chats.urls')),
 
@@ -28,4 +36,4 @@ urlpatterns = [
    #     template_name='swagger-ui.html',
    #     extra_context={'schema_url':'openapi-schema'}
    # ), name='swagger-ui'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

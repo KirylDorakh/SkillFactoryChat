@@ -3,10 +3,13 @@ from accounts.models import CustomUser
 
 from django.urls import reverse
 
+from django.contrib.auth import get_user_model
+
 
 class Chat(models.Model):
     title = models.CharField(max_length=64)
-    members = models.ManyToManyField(CustomUser)
+    members = models.ManyToManyField(get_user_model(), related_name='members')
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='author')
 
     def __str__(self):
         return self.title
@@ -20,9 +23,9 @@ class Message(models.Model):
                              on_delete=models.CASCADE,
                              related_name='message'
                              )
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    message_text = models.TextField()
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    message_text = models.CharField(max_length=512)
     message_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.message_text[:15]+'...'
+        return f'{self.user.username}: {self.message_text} [{self.message_time}]'
