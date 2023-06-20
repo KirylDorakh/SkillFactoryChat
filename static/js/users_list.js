@@ -9,11 +9,12 @@ const showUsers = (usersUrl) => {
         .then(data => {
             data.forEach(user => {
                 const container = document.createElement('div')
-                container.classList.add('container')
+                container.classList.add('user')
                 console.log(`${user.avatar}`)
-                container.innerHTML = `<img class="avatar" src="${user.avatar}" alt="avatar">
-                                       <p>${user.username}</p>
-                                       <a href="#">Message</a>`
+                container.innerHTML = `<a href="#" title="Write message">
+                                          <img class="avatar" src="${user.avatar}" alt="avatar">
+                                          <p>${user.username}</p>
+                                       </a>`
                 list.insertAdjacentElement('beforeend', container)
             })
         })

@@ -1,14 +1,31 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Home{% endblock title %}
 
 {% block content %}
-    {% if chats %}
-        <h1>Available chats</h1>
-        {% for chat in chats %}
-            <a href="{{ chat.get_absolute_url }}">{{ chat.title }}</a>
-        {% endfor %}
-    {% else %}
-        <h1> No chats </h1>
-    {% endif %}
+    <div class="home">
+        <aside>
+            <h1>List of users</h1>
+            <div class="list-users">
+            </div>
+        </aside>
+        <section class="chats">
+            {% if chats %}
+            <h1>Available chats</h1>
+            {% for chat in chats %}
+                <a href="{{ chat.get_absolute_url }}">
+                    <div class="chat">
+                        <h2>{{ chat.title }}</h2>
+                        <p>Chat participants: {{chat.members.count}}</p>
+                    </div>
+                </a>
+            {% endfor %}
+            {% else %}
+                <h1> No chats </h1>
+            {% endif %}
+        </section>
+    </div>
+
+    <script src="{% static 'js/users_list.js' %}"></script>
 {% endblock content %}
