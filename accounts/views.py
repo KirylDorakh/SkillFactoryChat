@@ -24,6 +24,10 @@ class CustomUserView(LoginRequiredMixin, generic.DetailView):
     template_name = 'account/profile.html'
 
 
+class CustomPasswordChangeView(PasswordChangeView):
+    success_url = reverse_lazy('profile')
+
+
 class CustomUserUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = CustomUser
     template_name = 'account/profile_edit.html'
@@ -31,7 +35,3 @@ class CustomUserUpdateView(LoginRequiredMixin, generic.UpdateView):
 
     def get_object(self, queryset=None):
         return self.request.user
-
-
-class CustomPasswordChangeView(PasswordChangeView):
-    success_url = reverse_lazy('profile')

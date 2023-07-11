@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     {% load static %}
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
 
@@ -19,10 +20,18 @@
 
                 {% if user.is_authenticated %}
                 <li class="nav_page">
-                    <a class="item" href="#"> Hi, {{ user.username }}! ▼</a>
+                    <a class="item nav-username" id={{user.id}} data-username={{user.username}} href="#">
+                        Hi, {{ user.username }}! ▼
+                    </a>
                     <ul class="menu">
-                        <li class="bar"><a class="secret" href="{% url 'profile' user.id %}" title="profile">Profile</a></li>
-                        <li class="bar"><a class="secret" href="{% url 'account_logout' %}" title="log out">Log out</a></li>
+                        <li class="bar"><a class="secret" href="{% url 'profile' user.id %}" title="profile">
+                                Profile
+                            </a>
+                        </li>
+                        <li class="bar"><a class="secret" href="{% url 'account_logout' %}" title="log out">
+                                Log out
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 {% else %}

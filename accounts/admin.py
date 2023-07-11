@@ -33,5 +33,4 @@ class CustomUserAdmin(UserAdmin):
         return mark_safe(f'<img src="http://localhost:8000{obj.avatar.url}" style="max-height: 200px;" alt="avatar">')
 
 
-
 admin.site.register(CustomUser, CustomUserAdmin)

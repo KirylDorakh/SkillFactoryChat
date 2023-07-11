@@ -157,6 +157,11 @@ aside h1{
     padding: 10px 0;
 }
 
+.chats .list-chats{
+    display: grid;
+    grid-gap: 1vw;
+}
+
 .chats .chat{
     display: flex;
     justify-content: space-between;
@@ -212,11 +217,6 @@ aside h1{
     background-color: #10373E;
 }
 
-.form {
-    width:960px;
-    padding: 20px 0;
-}
-
 input {
     display:block;
     width:100%;
@@ -232,7 +232,6 @@ input {
 input:hover {
     box-shadow:0 0 4px rgba(0,0,0,0.7);
 }
-
 
 a.button {
     display: inline-block;
@@ -260,6 +259,11 @@ a.button span{
     row-gap: 1vw;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
+}
+
+.profile span{
+    font-size: 22px;
+    font-weight: 900;
 }
 
 /* Avatar */
@@ -308,7 +312,86 @@ a.button span{
     background-color: #10373E;
 }
 
+.change-name{
+    display: none;
+    width: 500px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.change-name button{
+    margin: 0 10px;
+}
+
+
 /* Forms */
+.create-chat{
+    display: grid;
+    grid-gap: 1vw;
+    height: 70px;
+
+    border-radius: 5px;
+    background-color: rgba(234, 234, 234, 0.2);
+    box-shadow: 2px 2px 4px 0px rgb(56, 56, 56);
+
+    transition: height .2s;
+}
+
+.arrow-dwn{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    transition: .3s;
+}
+
+.create-chat-header{
+    height: 70px;
+    padding: 10px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.new-chat{
+    display: grid;
+    overflow: hidden;
+    opacity: 0;
+    height: 0;
+    padding: 10px 10px;
+    grid-gap: 1vw;
+    transition: height 100ms, opacity 200ms;
+}
+
+.create-chat.open{
+    height: 400px;
+}
+
+.create-chat.open .arrow-dwn{
+    transform: rotate(-180deg);
+}
+
+.create-chat.open .new-chat{
+    height: auto;
+    opacity: 1;
+    transition: height 100ms, opacity 200ms;
+}
+
+.btn-text{
+    font-size: 20px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.arrow{
+    width: 20px;
+}
+
+.form {
+    width:960px;
+    padding: 20px 0;
+}
+
 select.form-control {
   width: 100%;
   height: 5rem;

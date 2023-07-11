@@ -8,8 +8,8 @@
 
 {% block content %}
     <div class="profile">
-        <h2>{{ user.username}}</h2>
-        <p>Email: {{ user.email}}</p>
+        <h1>Profile</h1>
+        <p><span>Avatar: </span></p>
         <div class="avatar-container">
             <img class="avatar" src="{{ user.avatar.url }}" alt="avatar">
             <form class="change-img">
@@ -17,12 +17,26 @@
                 <input type="file" name="change" id="image" accept="image/*">
                 <button type="submit" class="btn">Submit</button>
             </form>
-
         </div>
+
+        <p class="current-username"><span>Username:</span> {{ user.username }}</p>
+        <div class="username-container">
+            <p>If you want to change name:</p>
+            <button class="btn open-form">Change name</button>
+            <form class="change-name">
+                {% csrf_token %}
+                <label for="username"></label>
+                <input type="text" name="username" id="username">
+                <button type="submit" class="btn">Submit</button>
+            </form>
+        </div>
+        <p><span>Email:</span> {{ user.email }}</p>
+
 
 
         <p><a class="button" href="{% url 'home' %}">Back</a></p>
     </div>
 
     <script src="{% static 'js/uploadimage.js' %}"></script>
+    <script src="{% static 'js/changename.js' %}"></script>
 {% endblock content %}

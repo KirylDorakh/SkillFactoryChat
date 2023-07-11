@@ -6,7 +6,7 @@ let changeUrl = url => {
     return url.replace(/accounts\/profile/, 'api/users/avatar')
 }
 
-const urlAPI = changeUrl(urlPage)
+const urlImageAPI = changeUrl(urlPage)
 
 function putImg(url, data){
     return fetch(url, data)
@@ -42,6 +42,6 @@ formImg.addEventListener('submit', (e) => {
         },
         body: formData
     }
-    const result = putImg(urlAPI, myInit)
+    const result = putImg(urlImageAPI, myInit)
     uploadImg(result)
 })

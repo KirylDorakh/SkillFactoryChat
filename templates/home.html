@@ -6,26 +6,52 @@
 {% block content %}
     <div class="home">
         <aside>
-            <h1>List of users</h1>
+            <h1>Private chats</h1>
             <div class="list-users">
             </div>
         </aside>
         <section class="chats">
-            {% if chats %}
-            <h1>Available chats</h1>
-            {% for chat in chats %}
-                <a href="{{ chat.get_absolute_url }}">
-                    <div class="chat">
-                        <h2>{{ chat.title }}</h2>
-                        <p>Chat participants: {{chat.members.count}}</p>
-                    </div>
-                </a>
-            {% endfor %}
-            {% else %}
-                <h1> No chats </h1>
-            {% endif %}
+            <h1>Group chats</h1>
+            <div class="list-chats">
+                {% for chat in chats %}
+                    {% if not chat.private %}
+                        <a href="{{ chat.get_absolute_url }}">
+                            <div class="chat">
+                                <h2>{{ chat.title }}</h2>
+                                <div>
+                                    <p>Chat participants: {{chat.members.count}}</p>
+                                </div>
+                            </div>
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+
+            <div class="create-chat">
+                <div class="create-chat-header">
+                    <span class="btn-text">Create new group chat</span>
+                    <span class="arrow-dwn">
+                        <img class="arrow" src="{% static 'images/chevron.png' %}" alt="arr">
+                    </span>
+                </div>
+
+                <form class="new-chat">
+                    <label for="title">Chat name</label>
+                    <input type="text" placeholder="Input chat name" id="title" name="title" required>
+                    <label for="members">Members</label>
+                    <select class="chosen-select" id="members" name="members" multiple>
+
+                    </select>
+                    <button class='btn' type="submit">Create chat</button>
+                </form>
+            </div>
         </section>
     </div>
-
-    <script src="{% static 'js/users_list.js' %}"></script>
+    <script src="{% static 'js/main_page/global_variables.js' %}"></script>
+    <script src="{% static 'js/main_page/create_private_chat.js' %}"></script>
+    <script src="{% static 'js/main_page/show_info.js' %}"></script>
+    <script src="{% static 'js/main_page/users_list.js' %}"></script>
+    <script src="{% static 'js/create_chat/dropdown.js' %}"></script>
+    <script src="{% static 'js/create_chat/create_group_chat.js' %}"></script>
 {% endblock content %}

@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 class ChatSerializer(serializers.ModelSerializer):
     class Meta:
         model = Chat
-        fields = ('id','title', 'members')
+        fields = ('id', 'author', 'title', 'members', 'private')
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -14,7 +14,14 @@ class UserSerializer(serializers.ModelSerializer):
         model = get_user_model()
         fields = ['id', 'username', 'email', 'avatar']
 
+
 class AvatarUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         fields = ['avatar']
+
+
+class UsernameUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = ['username']
