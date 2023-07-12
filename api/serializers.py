@@ -9,6 +9,18 @@ class ChatSerializer(serializers.ModelSerializer):
         fields = ('id', 'author', 'title', 'members', 'private')
 
 
+class ChatNameUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Chat
+        fields = ['title']
+
+
+class ChatMembersUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Chat
+        fields = ['members']
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()

@@ -5,7 +5,10 @@ from rest_framework.response import Response
 from chats.models import Chat
 from django.contrib.auth import get_user_model
 
-from .serializers import ChatSerializer, UserSerializer, AvatarUpdateSerializer, UsernameUpdateSerializer
+# chat
+from .serializers import ChatSerializer, ChatNameUpdateSerializer, ChatMembersUpdateSerializer
+# user
+from .serializers import UserSerializer, AvatarUpdateSerializer, UsernameUpdateSerializer
 
 # from .permissions import IsAuthorOrReadOnly
 # permission_classes = (IsAuthorOrReadOnly,)
@@ -41,9 +44,19 @@ class PrivateChat(APIView):
         return Response({'detail': 'chat not found'}, status=404)
 
 
-class DetailChat(generics.RetrieveAPIView):
+class DetailChat(generics.RetrieveUpdateDestroyAPIView):
     queryset = Chat.objects.all()
     serializer_class = ChatSerializer
+
+
+class ChatNameUpdateView(generics.UpdateAPIView):
+    serializer_class = ChatNameUpdateSerializer
+    queryset = Chat.objects.all()
+
+
+class ChatMembersUpdateView(generics.UpdateAPIView):
+    serializer_class = ChatMembersUpdateSerializer
+    queryset = Chat.objects.all()
 
 
 class ListUser(generics.ListAPIView):

@@ -1,40 +1,97 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}Home{% endblock title %}
+{% block title %}Chat{% endblock title %}
 
 {% block content %}
+<div class="container">
+    <section class="chat-settings">
+        <h2>Chat settings</h2>
 
-    {% for message in chat.message.all %}
-        <div>
-            <p>{{message.message_text}}</p>
-            <p>{{message.user}}</p>
-            <p>{{message.message_time}}</p>
-        </div>
-        <hr>
-
-    {% endfor %}
-
-    <div class="container mt-3 p-5">
-            <div class="row">
-                <div class="col-12 col-md-8">
-                    <div class="mb-2">
-                        <label for="chatLog">Room: #{{ room.name }}</label>
-                        <textarea class="form-control" id="chatLog" readonly></textarea>
-                    </div>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="chatMessageInput" placeholder="Enter your chat message">
-                        <div class="input-group-append">
-                            <button class="btn btn-success" id="chatMessageSend" type="button">Send</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <label >Online users</label>
-                    <select multiple class="form-control" id="onlineUsersSelector">
-                    </select>
-                </div>
+        <div class="username-container">
+            <div class="change-chat-name-header">
+                <span class="btn-name">Change name</span>
+                <span class="arrow-dwn">
+                    <img class="arrow" src="{% static 'images/chevron.png' %}" alt="arr">
+                </span>
             </div>
-<!--            {{ room.name|json_script:"roomName" }}-->
+            <form class="change-chat-name">
+                {% csrf_token %}
+                <label for="chatname"></label>
+                <input type="text" name="title" id="chatname">
+                <button type="submit" class="btn">Submit</button>
+            </form>
         </div>
+
+
+        <div class="members-container">
+            <div class="change-members-header">
+                <span class="btn-name">Members</span>
+                <span class="arrow-dwn">
+                    <img class="arrow" src="{% static 'images/chevron.png' %}" alt="arr">
+                </span>
+            </div>
+            <ul class="members-list">
+
+            </ul>
+        </div>
+        <div class="delete-container">
+            {% if chat.author == user %}
+                <button class="btn delete">Delete chat</button>
+            {% else %}
+                <button class="btn leave">Delete chat</button>
+        </div>
+        {% endif %}
+    </section>
+
+    <section class="chat-container">
+        <h1 class="chat-name">{{chat.title}}</h1>
+    </section>
+</div>
+
+
+<!--    {% for message in chat.message.all %}-->
+<!--        <div>-->
+<!--            <p>{{message.message_text}}</p>-->
+<!--            <p>{{message.user}}</p>-->
+<!--            <p>{{message.message_time}}</p>-->
+<!--        </div>-->
+<!--        <hr>-->
+
+<!--    {% endfor %}-->
+
+<!--    <div class="container mt-3 p-5">-->
+<!--            <div class="row">-->
+<!--                <div class="col-12 col-md-8">-->
+<!--                    <div class="mb-2">-->
+<!--                        <label for="chatLog">Room: #{{ room.name }}</label>-->
+<!--                        <textarea class="form-control" id="chatLog" readonly></textarea>-->
+<!--                    </div>-->
+<!--                    <div class="input-group">-->
+<!--                        <input type="text" class="form-control" id="chatMessageInput" placeholder="Enter your chat message">-->
+<!--                        <div class="input-group-append">-->
+<!--                            <button class="btn btn-success" id="chatMessageSend" type="button">Send</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-12 col-md-4">-->
+<!--                    <label >Online users</label>-->
+<!--                    <select multiple class="form-control" id="onlineUsersSelector">-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--&lt;!&ndash;            {{ room.name|json_script:"roomName" }}&ndash;&gt;-->
+<!--        </div>-->
+
+    <div>
+        <p><a class="button" href="{% url 'home' %}">Back</a></p>
+    </div>
+
+    <script src="{% static 'js/main_page/global_variables.js' %}"></script>
+    <script src="{% static 'js/chat/getChatInfo.js' %}"></script>
+    <script src="{% static 'js/chat/dropdown.js' %}"></script>
+    <script src="{% static 'js/chat/members_list.js' %}"></script>
+    <script src="{% static 'js/chat/change_chat_name.js' %}"></script>
+    <script src="{% static 'js/chat/delete_chat.js' %}"></script>
 
 {% endblock content %}

@@ -1,8 +1,3 @@
-const openForm = document.querySelector('.open-form')
-const formName = document.querySelector('.change-name')
-const username = document.querySelector('.current-username')
-const usernameNav = document.querySelector('.nav-username')
-
 const changeNameUrl = url => {
     return url.replace(/accounts\/profile/, 'api/users/username')
 }

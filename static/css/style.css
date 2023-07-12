@@ -326,9 +326,9 @@ a.button span{
 
 /* Forms */
 .create-chat{
-    display: grid;
-    grid-gap: 1vw;
+    display: block;
     height: 70px;
+    margin-bottom: 1vw;
 
     border-radius: 5px;
     background-color: rgba(234, 234, 234, 0.2);
@@ -360,7 +360,7 @@ a.button span{
     height: 0;
     padding: 10px 10px;
     grid-gap: 1vw;
-    transition: height 100ms, opacity 200ms;
+    transition: height 100ms, opacity 300ms;
 }
 
 .create-chat.open{
@@ -374,17 +374,21 @@ a.button span{
 .create-chat.open .new-chat{
     height: auto;
     opacity: 1;
-    transition: height 100ms, opacity 200ms;
+    transition: height 100ms, opacity 300ms;
 }
 
 .btn-text{
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 900;
     text-transform: uppercase;
 }
 
 .arrow{
     width: 20px;
+}
+
+.chosen-select{
+    height: 130px;
 }
 
 .form {
@@ -415,4 +419,116 @@ select.form-control:focus {
   border-color: #80bdff;
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+
+/* Chat */
+.container{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 1fr;
+    grid-gap: 2vw;
+    margin: 1rem auto;
+}
+
+.container .chat-settings{
+    border-radius: 5px;
+    background-color: rgba(234, 234, 234, 0.2);
+    box-shadow: 2px 2px 4px 0px rgb(56, 56, 56);
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+}
+
+.container .chat-settings h2{
+    padding: 5px;
+}
+
+.change-chat-name-header {
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+    width: auto;
+    align-items: center;
+    background-color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 1px 1px 2px 0px rgb(56, 56, 56);
+}
+
+.change-chat-name-header .btn-name{
+    padding: 10px;
+}
+
+.change-chat-name-header .arrow-dwn{
+    padding: 10px;
+}
+
+.change-chat-name{
+    position: absolute;
+    z-index: 5;
+    width: 300px;
+    padding: 10px;
+    margin-top: 5px;
+
+    display: none;
+
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px 0px rgb(56, 56, 56);
+}
+
+.username-container.open .change-chat-name{
+    display: block;
+}
+
+.username-container.open .arrow-dwn{
+    transform: rotate(-180deg);
+}
+
+
+.change-members-header{
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+    width: auto;
+    align-items: center;
+    background-color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 1px 1px 2px 0px rgb(56, 56, 56);
+}
+
+.change-members-header .btn-name{
+    padding: 10px;
+}
+
+.change-members-header .arrow-dwn{
+    padding: 10px;
+}
+
+.members-list{
+    position: absolute;
+    z-index: 5;
+    width: 300px;
+    padding: 10px;
+    margin-top: 5px;
+
+    display: none;
+
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px 0px rgb(56, 56, 56);
+}
+
+.members-container.open .members-list{
+    display: block;
+}
+
+.members-container.open .arrow-dwn{
+    transform: rotate(-180deg);
 }
