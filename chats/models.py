@@ -33,4 +33,5 @@ class Message(models.Model):
     message_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.user.username}: {self.message_text} [{self.message_time}]'
+        formatted_time = self.message_time.strftime('%Y-%m-%d %H:%M:%S')
+        return f'{self.user.username} {self.message_text} [{formatted_time}]'

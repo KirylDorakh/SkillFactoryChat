@@ -32,7 +32,7 @@
 
             <div class="list-chats">
                 {% for chat in chats %}
-                    {% if not chat.private %}
+                    {% if not chat.private and user in chat.members.all  %}
                         <a href="{{ chat.get_absolute_url }}">
                             <div class="chat">
                                 <h2>{{ chat.title }}</h2>
@@ -54,4 +54,5 @@
     <script src="{% static 'js/main_page/dropdown.js' %}"></script>
     <script src="{% static 'js/main_page/usersListGroupChat.js' %}"></script>
     <script src="{% static 'js/create_chat/create_group_chat.js' %}"></script>
+
 {% endblock content %}

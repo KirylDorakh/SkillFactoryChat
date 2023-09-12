@@ -33,14 +33,41 @@ async function getUsers(usersUrl){
 
 // show List
 function showInfo(members, users_data){
-    users_data.then(users => console.log(users, members))
+    return users_data.then(users => {
+        users.forEach(user => {
+            if (user.id !== +loginUser.id){
+                const item = document.createElement('li')
+                item.classList.add('user')
+                item.id = `${user.id}`
+                item.innerHTML = `<span class="checkbox"><img class="checkbox-icon" src="../../static/images/check.png" 
+                                                              alt="checkbox"></span>
+                              <span>${user.username}</span>`
+                members_list.insertAdjacentElement('afterbegin', item)
+            }
+        })
+        const userItems = document.querySelectorAll('.user')
+        userItems.forEach(item => {
+            if (members.includes(+item.id)){
+                item.classList.toggle("checked")
+            }
+        })
+        return userItems
+    })
+}
+
+function checkedUsersList(usersList){
+    usersList.forEach(item => {
+        item.addEventListener('click', () => {
+            item.classList.toggle("checked")
+        })
+    })
 }
 
 // загрузка страницы
 document.addEventListener('DOMContentLoaded', () => {
-    const members = getChatInfo(getPutDeleteURL)
+    getChatInfo(getPutDeleteURL)
         .then(response => getMembers(response))
         .then(members => showInfo(members, getUsers(usersUrl)))
+        .then(usersList => checkedUsersList(usersList))
         .catch(e => console.error(e))
-
 })

@@ -7,7 +7,7 @@
 <div class="container">
     <section class="chat-settings">
         <h2>Chat settings</h2>
-
+        <!--  Изменить имя чата может любой пользователь любого чата     -->
         <div class="username-container">
             <div class="change-chat-name-header">
                 <span class="btn-name">Change name</span>
@@ -22,70 +22,80 @@
                 <button type="submit" class="btn">Submit</button>
             </form>
         </div>
-
-
-        <div class="members-container">
-            <div class="change-members-header">
-                <span class="btn-name">Members</span>
-                <span class="arrow-dwn">
-                    <img class="arrow" src="{% static 'images/chevron.png' %}" alt="arr">
-                </span>
-            </div>
-            <ul class="members-list">
-
-            </ul>
-        </div>
-        <div class="delete-container">
+        <!-- Можно редактировать параметры только группового чата  -->
+        {% if not chat.private%}
+            <!--  Удалять и редактировать участников чата может только создатель чата  -->
             {% if chat.author == user %}
-                <button class="btn delete">Delete chat</button>
+                <div class="members-container">
+                    <div class="change-members-header">
+                        <span class="btn-name">Participants</span>
+                        <span class="arrow-dwn">
+                            <img class="arrow" src="{% static 'images/chevron.png' %}" alt="arr">
+                        </span>
+                    </div>
+                    <ul class="members-list">
+                        <button type="submit" class="btn edit-members">Save changes</button>
+                    </ul>
+                </div>
+                <div class="delete-container">
+                    <button class="btn delete">Delete chat</button>
+                </div>
+            <!--   Участник чата может покинуть чат   -->
             {% else %}
-                <button class="btn leave">Delete chat</button>
-        </div>
+                <div class="leave-container">
+                    <button class="btn leave">Leave chat</button>
+                </div>
+            {% endif %}
         {% endif %}
     </section>
 
     <section class="chat-container">
-        <h1 class="chat-name">{{chat.title}}</h1>
+        <div class="chat-title">
+            <h1 class="chat-name">{{chat.title}}</h1>
+            <h3> Participants: <span class="members-name">
+                        {{chat.members.all.count}}
+                      </span>
+            </h3>
+        </div>
+
+
+<!--    Chat    -->
+        <div class="chat-window">
+            {% for message in chat.message.all %}
+            {% if message.user.username == user.username %}
+            <div class="chat-message-container">
+                <p class="chat-message-sender">{{message.user}}</p>
+                <div class="chat-message">
+                    <p>{{message.message_text}}</p>
+                    <img class="avatar" src="{{ user.avatar.url }}" alt="avatar">
+                    <span class="time">{{ message.message_time|date:"g:i A, d.m.Y" }}</span>
+                </div>
+            </div>
+            {% else %}
+            <div class="chat-message-container">
+                <p class="chat-message-sender-left">{{message.user}}</p>
+                <div class="chat-message lighter">
+                    <p class="chat-message-text">{{message.message_text}}</p>
+                    <img class="avatar" src="{{ message.user.avatar.url }}" alt="avatar">
+                    <span class="time right">{{ message.message_time|date:"g:i A, d.m.Y" }}</span>
+                </div>
+            </div>
+            {% endif %}
+
+            {% endfor %}
+        </div>
+
+        <input id="chat-message-input" type="text" size="100" placeholder="Write message...">
+        <input id="chat-message-submit" type="button" value="Send">
+        {{ chat.id|json_script:"room-name" }}
     </section>
-</div>
-
-
-<!--    {% for message in chat.message.all %}-->
-<!--        <div>-->
-<!--            <p>{{message.message_text}}</p>-->
-<!--            <p>{{message.user}}</p>-->
-<!--            <p>{{message.message_time}}</p>-->
-<!--        </div>-->
-<!--        <hr>-->
-
-<!--    {% endfor %}-->
-
-<!--    <div class="container mt-3 p-5">-->
-<!--            <div class="row">-->
-<!--                <div class="col-12 col-md-8">-->
-<!--                    <div class="mb-2">-->
-<!--                        <label for="chatLog">Room: #{{ room.name }}</label>-->
-<!--                        <textarea class="form-control" id="chatLog" readonly></textarea>-->
-<!--                    </div>-->
-<!--                    <div class="input-group">-->
-<!--                        <input type="text" class="form-control" id="chatMessageInput" placeholder="Enter your chat message">-->
-<!--                        <div class="input-group-append">-->
-<!--                            <button class="btn btn-success" id="chatMessageSend" type="button">Send</button>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-12 col-md-4">-->
-<!--                    <label >Online users</label>-->
-<!--                    <select multiple class="form-control" id="onlineUsersSelector">-->
-<!--                    </select>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--&lt;!&ndash;            {{ room.name|json_script:"roomName" }}&ndash;&gt;-->
-<!--        </div>-->
 
     <div>
         <p><a class="button" href="{% url 'home' %}">Back</a></p>
     </div>
+</div>
+
+
 
     <script src="{% static 'js/main_page/global_variables.js' %}"></script>
     <script src="{% static 'js/chat/getChatInfo.js' %}"></script>
@@ -93,5 +103,9 @@
     <script src="{% static 'js/chat/members_list.js' %}"></script>
     <script src="{% static 'js/chat/change_chat_name.js' %}"></script>
     <script src="{% static 'js/chat/delete_chat.js' %}"></script>
+    <script src="{% static 'js/chat/add_remove_members.js' %}"></script>
+    <script src="{% static 'js/chat/leave_chat.js' %}"></script>
+
+    <script src="{% static 'js/chat/room_name.js' %}"></script>
 
 {% endblock content %}

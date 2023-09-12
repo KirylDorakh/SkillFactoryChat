@@ -1,13 +1,5 @@
 const deleteBtn = document.querySelector('.delete')
 
-async function deleteChat(deleteUrl){
-    try {
-        await fetch(deleteUrl, )
-    } catch (e) {
-        console.error(e)
-    }
-}
-
 deleteBtn.addEventListener('click', ()=>{
     fetch(getPutDeleteURL, {
         method: 'DELETE',

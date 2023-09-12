@@ -11,17 +11,17 @@
 
 {% block content %}
     <div class="login">
-    <h2>Log In</h2>
+        <h2>Log In</h2>
 
-    <p>If you have not created an account yet, then please
-    <a href="{{ signup_url }}">Sign in</a> first.</p>
+        <p>If you have not created an account yet, then please
+        <a href="{{ signup_url }}">Sign in</a> first.</p>
 
 
-    <form class="form" method="post">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <button class="btn" type="submit">Log In</button>
-    </form>
+        <form class="form" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button class="btn" type="submit">Log In</button>
+        </form>
     </div>
     <div class="pass">
         <p>Forgotten your password?</p>
