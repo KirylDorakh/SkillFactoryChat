@@ -35,4 +35,6 @@ editNameForm.addEventListener('submit', (e) => {
 
     const response = editChatName(getEditChatNameUrl, myInit)
     refreshPage(response)
+    editName.classList.remove('open');
+    e.target.reset();
 })

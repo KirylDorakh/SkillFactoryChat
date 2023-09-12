@@ -44,4 +44,5 @@ formImg.addEventListener('submit', (e) => {
     }
     const result = putImg(urlImageAPI, myInit)
     uploadImg(result)
+    e.target.reset()
 })

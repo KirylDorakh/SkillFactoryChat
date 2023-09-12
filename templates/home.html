@@ -4,6 +4,8 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
+
+{% if user.is_authenticated %}
     <div class="home">
         <aside>
             <h1>Private chats</h1>
@@ -54,5 +56,12 @@
     <script src="{% static 'js/main_page/dropdown.js' %}"></script>
     <script src="{% static 'js/main_page/usersListGroupChat.js' %}"></script>
     <script src="{% static 'js/create_chat/create_group_chat.js' %}"></script>
+
+
+{% else %}
+<div class="not_auth">
+    <h1>Log in or sign up!</h1>
+</div>
+{% endif %}
 
 {% endblock content %}

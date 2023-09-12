@@ -5,6 +5,11 @@
     font-family: 'Source Sans Pro', sans-serif;
     text-decoration: none;
 }
+.not_auth{
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
 
 /*Header*/
 header {

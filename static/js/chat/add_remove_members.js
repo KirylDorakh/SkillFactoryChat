@@ -50,4 +50,6 @@ edit_members.addEventListener('click', () => {
         .then(members_init => editChatMembers(members_init))
         .then(new_members => updateInfoOnPage(new_members))
         .catch(err => console.error(err))
+
+    editMembers.classList.remove('open');
 })

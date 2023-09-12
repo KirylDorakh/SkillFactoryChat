@@ -44,4 +44,7 @@ createForm.addEventListener('submit', (event) => {
     createGroupChat(createUrl, chatInit)
         .then(newChat => updateGroupChatsList(newChat))
         .catch(err => console.error(err))
+
+    createForm.classList.remove('open')
+    event.target.reset();
 })

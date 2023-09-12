@@ -31,6 +31,15 @@ async function currentName(data) {
 formName.addEventListener('submit', (e) => {
     e.preventDefault()
 
+    const usernamePattern = /^[a-zA-Z0-9@/./+/-/_]+$/;
+    const name = document.getElementById('username').value
+
+    if(!usernamePattern.test(name)){
+        console.log(name)
+        alert('Enter a valid username. This value may contain only letters, numbers, and @/./+/-/_ characters.', name)
+        return;
+    }
+
     const formData = new FormData(e.target)
 
     const myInit = {
@@ -43,4 +52,6 @@ formName.addEventListener('submit', (e) => {
 
     const result = changeName(urlNameAPI, myInit)
     currentName(result)
+    formName.style.display = 'none'
+    e.target.reset()
 })
